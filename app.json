@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "recipeApp",
-    "slug": "recipeApp",
+    "name": "foodApp",
+    "slug": "foodApp",
     "platforms": [
       "ios",
       "android",
