@@ -1,26 +1,24 @@
 import React, {useState}            from "react"
 import SearchBar                    from "../components/searchBar"
 import {View, Text, StyleSheet }    from "react-native"
-import yelp                         from "../API/Yelp"
+import useRestaurants               from "../hooks/useRestaurants"
+import ResultsList                  from "../components/resultsList"
 
 const SearchScreen = () => {
 
-    const [term, setTerm]       = useState('');
-    const [results, setResults] = useState([]);
+    const [term, setTerm]  = useState('');
+    const [searchAPI, results, errMessage] = useRestaurants();
 
-    const searchAPI = async () => {
-        const response = await yelp.get("/search", {
-            params: {
-                limit: 50,
-                term,
-                location: "Palo Alto"
+    const priceFilter = (price) =>  {
 
-            }
-        }) // Once the data is brought back it'll be stored in the variable
-        console.log(response.data)
-        setResults(response.data.businesses)
-            
+        return results.filter( result => {
+            return result.price === price
+        })
+
+
     }
+
+    console.log(results)
 
     return (
 
@@ -28,9 +26,16 @@ const SearchScreen = () => {
             <SearchBar 
                 term={term} 
                 onTermChange={setTerm} 
-                onTermSubmit= {searchAPI}
+                onTermSubmit= {() => searchAPI(term)}
             />
             <Text>We have found {results.length} results</Text>
+            {errMessage ? <Text>{errMessage}</Text> : null}
+
+            <ResultsList title="Cost Effective" results={priceFilter("$")}  />
+            <ResultsList title="Bit Pricier"    results={priceFilter("$$")} />
+            <ResultsList title="Big Spender"    results={priceFilter("$$$")} />
+            <ResultsList title="For Zucks"      results={priceFilter("$$$$")} />
+
         </View>
 
     )
