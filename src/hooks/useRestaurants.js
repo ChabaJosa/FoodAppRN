@@ -28,7 +28,7 @@ export default () => {
     }
 
     useEffect(() => {
-        searchAPI('paste')
+        searchAPI('pasta')
     }, []) // AKA ComponentDidMount()
 
     return [searchAPI, results, errMessage]
