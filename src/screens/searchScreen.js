@@ -1,8 +1,8 @@
-import React, {useState}            from "react"
-import SearchBar                    from "../components/searchBar"
-import {View, Text, StyleSheet }    from "react-native"
-import useRestaurants               from "../hooks/useRestaurants"
-import ResultsList                  from "../components/resultsList"
+import React, {useState}                        from "react"
+import SearchBar                                from "../components/searchBar"
+import {View, Text, StyleSheet, ScrollView }    from "react-native"
+import useRestaurants                           from "../hooks/useRestaurants"
+import ResultsList                              from "../components/resultsList"
 
 const SearchScreen = () => {
 
@@ -28,13 +28,15 @@ const SearchScreen = () => {
                 onTermChange={setTerm} 
                 onTermSubmit= {() => searchAPI(term)}
             />
-            <Text>We have found {results.length} results</Text>
+            <Text style={styles.text}>We have found {results.length} results</Text>
             {errMessage ? <Text>{errMessage}</Text> : null}
-
-            <ResultsList title="Cost Effective" results={priceFilter("$")}  />
-            <ResultsList title="Bit Pricier"    results={priceFilter("$$")} />
-            <ResultsList title="Big Spender"    results={priceFilter("$$$")} />
-            <ResultsList title="For Zucks"      results={priceFilter("$$$$")} />
+            
+            <ScrollView>
+                <ResultsList title="Cost Effective" results={priceFilter("$")}  />
+                <ResultsList title="Bit Pricier"    results={priceFilter("$$")} />
+                <ResultsList title="Big Spender"    results={priceFilter("$$$")} />
+                <ResultsList title="For Zucks"      results={priceFilter("$$$$")} />
+            </ScrollView>
 
         </View>
 
@@ -42,7 +44,9 @@ const SearchScreen = () => {
 }
 
 const styles  = StyleSheet.create({
-
+    text: {
+        marginLeft: 15
+    }
 });
 
 export default SearchScreen; 

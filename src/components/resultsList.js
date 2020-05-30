@@ -5,11 +5,12 @@ import ResultsDetail from "./resultsDetail"
 
 const resultsList = ({title, results}) => {
     return (
-        <View style={styles.view} >
+        <View >
             <Text style={styles.titleStyle}>{title}</Text>
-            <Text > Results: {results.length}</Text>
+            <Text style={styles.text} >Results: {results.length}</Text>
             <FlatList 
-                horizontal={true}
+                horizontal={true} 
+                showsHorizontalScrollIndicator={false} // Removes horizontal scrollar
                 data={results}
                 keyExtractor={(result) => result.id}
                 renderItem={({ item }) => {
@@ -24,11 +25,12 @@ const resultsList = ({title, results}) => {
 
 const styles = StyleSheet.create({
 
-    view:{
-        margin: 10,
-        padding: 10
+    text:{
+        marginLeft: 15
     },
     titleStyle: {
+        marginLeft: 15,
+        marginTop: 15,
         fontSize: 18,
         fontWeight: "bold"
     }

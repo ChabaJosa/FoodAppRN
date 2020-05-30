@@ -8,7 +8,7 @@ const ResultsDetail = ( { APIresult }) => {
         <View style={styles.view}>
             <Image style={styles.image} source={{uri: APIresult.image_url}}/>
             <Text style={styles.name} >{APIresult.name}</Text>
-        
+            <Text> {APIresult.rating} Stars, {APIresult.review_count} Reviews</Text>
         </View>
     );
 };
@@ -16,7 +16,8 @@ const ResultsDetail = ( { APIresult }) => {
 const styles = StyleSheet.create({
 
     view: {
-        padding: 5,
+        marginLeft: 15,
+        marginTop: 10,
     },
 
     image: {
