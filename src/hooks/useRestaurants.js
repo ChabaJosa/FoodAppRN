@@ -14,15 +14,19 @@ export default () => {
                 params: {
                     limit: 50,
                     term: searchTerm,
-                    location: "Palo Alto"
+                    location: "Pembroke Pines"
 
                 }
             }) // Once the data is brought back it'll be stored in the variable
-            // console.log(response.data)
+            console.log("Response data is", response.data)
             setResults(response.data.businesses)
 
         } catch (error) {
             setErrMessage("Something's not right :( Try again later...")
+        }
+
+        if (results.length > 0 ) {
+            setErrMessage("")
         }
             
     }

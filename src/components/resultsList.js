@@ -1,9 +1,9 @@
 import React from 'react';
-import {View, Text, StyleSheet, FlatList } from "react-native"
+import {View, Text, StyleSheet, FlatList, TouchableOpacity } from "react-native"
 import ResultsDetail from "./resultsDetail"
 
 
-const resultsList = ({title, results}) => {
+const resultsList = ({title, results, navigation}) => {
     return (
         <View >
             <Text style={styles.titleStyle}>{title}</Text>
@@ -14,7 +14,13 @@ const resultsList = ({title, results}) => {
                 data={results}
                 keyExtractor={(result) => result.id}
                 renderItem={({ item }) => {
-                    return <ResultsDetail APIresult={item} />
+
+                    return (
+                        <TouchableOpacity onPress={() => navigation.navigate("ResultsShow") } >
+                            <ResultsDetail APIresult={item} />
+                        </TouchableOpacity>
+                    )
+                    
                 }}
                 // renderItem has multiple props but item is the actual object we are iterating over
             />

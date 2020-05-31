@@ -4,7 +4,7 @@ import {View, Text, StyleSheet, ScrollView }    from "react-native"
 import useRestaurants                           from "../hooks/useRestaurants"
 import ResultsList                              from "../components/resultsList"
 
-const SearchScreen = () => {
+const SearchScreen = ( { navigation } ) => {
 
     const [term, setTerm]  = useState('');
     const [searchAPI, results, errMessage] = useRestaurants();
@@ -18,27 +18,26 @@ const SearchScreen = () => {
 
     }
 
-    console.log(results)
+    console.log( "These are the results", results)
 
     return (
 
-        <View>
+        <>
             <SearchBar 
                 term={term} 
                 onTermChange={setTerm} 
                 onTermSubmit= {() => searchAPI(term)}
             />
-            <Text style={styles.text}>We have found {results.length} results</Text>
-            {errMessage ? <Text>{errMessage}</Text> : null}
-            
+            {errMessage ? <Text style={styles.text} >{errMessage}</Text> : <Text style={styles.text}>We have found {results.length} results</Text> }
+
             <ScrollView>
-                <ResultsList title="Cost Effective" results={priceFilter("$")}  />
-                <ResultsList title="Bit Pricier"    results={priceFilter("$$")} />
-                <ResultsList title="Big Spender"    results={priceFilter("$$$")} />
-                <ResultsList title="For Zucks"      results={priceFilter("$$$$")} />
+                <ResultsList title="Cost Effective" results={priceFilter("$")}      navigation={navigation} />
+                <ResultsList title="Bit Pricier"    results={priceFilter("$$")}     navigation={navigation} />
+                <ResultsList title="Big Spender"    results={priceFilter("$$$")}    navigation={navigation} />
+                <ResultsList title="For Zucks"      results={priceFilter("$$$$")}   navigation={navigation} />
             </ScrollView>
 
-        </View>
+        </>
 
     )
 }
