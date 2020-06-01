@@ -1,9 +1,14 @@
-import React from 'react';
+import React                from 'react';
+import ResultsDetail        from "./resultsDetail"
+import { withNavigation }   from "react-navigation" // This is so that we don't have to pass down the Navigation prop to search screen and then here
 import {View, Text, StyleSheet, FlatList, TouchableOpacity } from "react-native"
-import ResultsDetail from "./resultsDetail"
-
 
 const resultsList = ({title, results, navigation}) => {
+
+    if (!results.length){
+        return null
+    } 
+
     return (
         <View >
             <Text style={styles.titleStyle}>{title}</Text>
@@ -16,7 +21,7 @@ const resultsList = ({title, results, navigation}) => {
                 renderItem={({ item }) => {
 
                     return (
-                        <TouchableOpacity onPress={() => navigation.navigate("ResultsShow") } >
+                        <TouchableOpacity onPress={() => navigation.navigate("ResultsShow", {id: item.id}) } >
                             <ResultsDetail APIresult={item} />
                         </TouchableOpacity>
                     )
@@ -42,4 +47,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default resultsList;
+export default withNavigation(resultsList);

@@ -4,7 +4,7 @@ import {View, Text, StyleSheet, ScrollView }    from "react-native"
 import useRestaurants                           from "../hooks/useRestaurants"
 import ResultsList                              from "../components/resultsList"
 
-const SearchScreen = ( { navigation } ) => {
+const SearchScreen = ( ) => {
 
     const [term, setTerm]  = useState('');
     const [searchAPI, results, errMessage] = useRestaurants();
@@ -31,10 +31,10 @@ const SearchScreen = ( { navigation } ) => {
             {errMessage ? <Text style={styles.text} >{errMessage}</Text> : <Text style={styles.text}>We have found {results.length} results</Text> }
 
             <ScrollView>
-                <ResultsList title="Cost Effective" results={priceFilter("$")}      navigation={navigation} />
-                <ResultsList title="Bit Pricier"    results={priceFilter("$$")}     navigation={navigation} />
-                <ResultsList title="Big Spender"    results={priceFilter("$$$")}    navigation={navigation} />
-                <ResultsList title="For Zucks"      results={priceFilter("$$$$")}   navigation={navigation} />
+                <ResultsList title="Cost Effective" results={priceFilter("$")}     />
+                <ResultsList title="Bit Pricier"    results={priceFilter("$$")}    />
+                <ResultsList title="Big Spender"    results={priceFilter("$$$")}   />
+                <ResultsList title="For Zucks"      results={priceFilter("$$$$")}  />
             </ScrollView>
 
         </>
