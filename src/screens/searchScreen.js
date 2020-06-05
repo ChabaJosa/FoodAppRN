@@ -7,7 +7,9 @@ import ResultsList                              from "../components/resultsList"
 const SearchScreen = ( ) => {
 
     const [term, setTerm]  = useState('');
-    const [searchAPI, results, errMessage] = useRestaurants();
+    const [location, setLocation]  = useState('');
+
+    const [searchAPI, results, errMessage, ] = useRestaurants();
 
     const priceFilter = (price) =>  {
 
@@ -18,17 +20,26 @@ const SearchScreen = ( ) => {
 
     }
 
-    console.log( "These are the results", results)
+    console.log( "These are the results $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$", results)
 
     return (
 
         <>
             <SearchBar 
-                term={term} 
-                onTermChange={setTerm} 
-                onTermSubmit= {() => searchAPI(term)}
+                input={term} 
+                hook={setTerm} 
+                onSubmit= {() => searchAPI(term, location)}
+                placeholder="Search"
             />
-            {errMessage ? <Text style={styles.text} >{errMessage}</Text> : <Text style={styles.text}>We have found {results.length} results</Text> }
+            <SearchBar 
+                input={location} 
+                hook={setLocation} 
+                onSubmit= {() => searchAPI(term, location)}
+                placeholder="Location"
+            />
+            {errMessage || results.length === 0 ? <Text style={styles.text} >{errMessage}</Text> : <Text style={styles.text}>We have found {results.length} results of {
+            `"${results[0].categories[0].alias}"`
+            } in {results[0].location.city}</Text> }
 
             <ScrollView>
                 <ResultsList title="Cost Effective" results={priceFilter("$")}     />

@@ -46,14 +46,14 @@ const resultsShowScreen = ({ navigation }) => {
 
         <View style={styles.card}>
 
+            <Text style={styles.cardContent} >Categories:</Text>
             <FlatList 
                 style={styles.cardContent}
                 horizontal={true} 
                 data={result.categories}
                 keyExtractor= {category => category.title }
-                renderItem = { ({ item }) => { return <Text>Categories: {item.title}</Text> }}
+            renderItem = { ({ item }) => { return <Text style={styles.italic}>{" "}{item.title}</Text> }}
             />
-            <Text style={styles.cardContent} >Phone: {result.display_phone}</Text>
             <Text style={styles.cardContent} >Open Now?: {result.display_phone == false ? "Nope" : "Yeah"}</Text>
             {result.location.display_address ? <Text style={styles.cardContent} >{result.location.display_address}</Text> : null }
 
@@ -96,6 +96,9 @@ const styles = StyleSheet.create({
     },
     cardContent: {
         margin: 18
+    },
+    italic:{
+        fontStyle: 'italic'
     }
     // Card styling from https://www.youtube.com/watch?v=5NewXsBnoKw
 

@@ -2,7 +2,7 @@ import React, {useReducer}  from "react"
 import { Feather }          from '@expo/vector-icons'
 import {View, TextInput , Text, StyleSheet } from "react-native"
 
-const SearchBar = ({ term, onTermChange, onTermSubmit }) => {
+const SearchBar = ({ input, hook, onSubmit, placeholder }) => {
     return (
         <View style={styles.background}>
             <Feather
@@ -12,11 +12,11 @@ const SearchBar = ({ term, onTermChange, onTermSubmit }) => {
             <TextInput
                 autoCapitalize="none"
                 autoCorrect={false}
-                placeholder="Search"
+                placeholder={placeholder}
                 style={styles.inputStyle}
-                value={term}
-                onChangeText={ onTermChange } // No parenthesis will invoke the function whenever onChangeText
-                onEndEditing={ onTermSubmit } // or onEndEditing takes place
+                value={input}
+                onChangeText={ hook } // No parenthesis will invoke the function whenever onChangeText
+                onEndEditing={ onSubmit } // or onEndEditing takes place
             />
         </View>
     )

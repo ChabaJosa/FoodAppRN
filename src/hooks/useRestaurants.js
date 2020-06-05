@@ -6,7 +6,7 @@ export default () => {
     const [results, setResults]         = useState([]);
     const [errMessage, setErrMessage ]  = useState("");
 
-    const searchAPI = async (searchTerm) => {
+    const searchAPI = async (searchTerm, searchLocation) => {
 
         try {
 
@@ -14,11 +14,12 @@ export default () => {
                 params: {
                     limit: 50,
                     term: searchTerm,
-                    location: "Pembroke Pines"
+                    location: searchLocation
 
                 }
             }) // Once the data is brought back it'll be stored in the variable
-            console.log("Response data is", response.data)
+            console.log("Here's the response -------------------------------------------------",response)
+            console.log("Response data is >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>", response.data)
             setResults(response.data.businesses)
 
         } catch (error) {
@@ -32,7 +33,7 @@ export default () => {
     }
 
     useEffect(() => {
-        searchAPI('pasta')
+        searchAPI('pasta', 'Pembroke Pines')
     }, []) // AKA ComponentDidMount()
 
     return [searchAPI, results, errMessage]
