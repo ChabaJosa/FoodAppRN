@@ -23,6 +23,8 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "Simple Yelp API query app for searching restaurants.",
+    "githubUrl": "https://github.com/ChabaJosa/FoodAppRN"
   }
 }
